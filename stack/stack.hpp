@@ -7,12 +7,13 @@ namespace tt {
 
 template <typename T, typename Container = std::vector<T> >
 class stack {
+public:
     typedef T value_type;
-    typedef Container container_type;
+    typedef std::vector<T> container_type;
     typedef std::size_t size_type;
-
+public:
     explicit stack (const container_type& cont = container_type()) : container() {}
-
+public:
     bool empty() const {
         return (container.empty());
     }
@@ -29,20 +30,53 @@ class stack {
         return (container.back());
     }
 
-    void push(const value_type& value) const {
-        return container.push_back(value);
+    void push(const value_type& val) {
+        return container.push_back(val);
     }
 
     void pop() {
         return container.pop_back();
     }
 
-    private:
-        container_type container;
-}; // stack
+protected:
+    container_type container;
+};
 
-// operators: ==, !=, <, <-, >, >=
+template <typename T, typename Container>
+    bool operator== (const stack<T, Container>& lhs,
+                    const stack<T, Container>& rhs) {
+        return (lhs.container == rhs.constainer);
+    }
 
-}; // namespace tt
+template <typename T, typename Container>
+    bool operator!= (const stack<T, Container>& lhs,
+                     const stack<T, Container>& rhs) {
+        return (lhs.container != rhs.constainer);
+    }
 
+template <typename T, typename Container>
+    bool operator> (const stack<T, Container>& lhs,
+                    const stack<T, Container>& rhs) {
+        return (lhs.container > rhs.constainer);
+    }
+
+template <typename T, typename Container>
+    bool operator< (const stack<T, Container>& lhs,
+                    const stack<T, Container>& rhs) {
+        return (lhs.container < rhs.constainer);
+    }
+
+template <typename T, typename Container>
+    bool operator<= (const stack<T, Container>& lhs,
+                     const stack<T, Container>& rhs) {
+        return (lhs.container <= rhs.constainer);
+    }
+
+template <typename T, typename Container>
+    bool operator>= (const stack<T, Container>& lhs,
+                     const stack<T, Container>& rhs) {
+        return (lhs.container >= rhs.constainer);
+    }
+
+};
 #endif
